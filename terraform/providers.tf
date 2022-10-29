@@ -7,7 +7,7 @@ terraform {
   }
 }
 
-#provider "aws" {
-	profile = "javan"
+provider "aws" {
+	
 	region = "us-east-1"
 }
