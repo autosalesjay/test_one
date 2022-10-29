@@ -81,6 +81,8 @@ kubectl apply -f ingress.yaml
 ```
 
 Verify ingress by accessing above load balancer dns.
+
 Accessing to http://a6f752d8ef7a94ddfbb0c7123619a4ce-300370210.us-east-1.elb.amazonaws.com/ should return "Nginx Main" - which is the index file of first Nginx container
+
 Acccessing to http://a6f752d8ef7a94ddfbb0c7123619a4ce-300370210.us-east-1.elb.amazonaws.com/whoami/ should return "Nginx WhoAmI" - which is the index file of whoami container
 
