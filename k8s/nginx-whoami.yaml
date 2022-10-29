@@ -1,0 +1,49 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-whoami-index
+data:
+  index.html: |
+    <html>
+    <h1>Nginx WhoAmI</h1>
+    </br>
+    </html>
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-whoami
+spec:
+  selector:
+    matchLabels:
+      app: nginx-whoami
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: nginx-whoami
+    spec:
+      containers:
+      - name: nginx-whoami
+        image: nginx:1.14.2
+        ports:
+        - containerPort: 80
+        volumeMounts:
+          - name: nginx-whoami-index
+            mountPath: /usr/share/nginx/html/whoami
+      volumes:
+      - name: nginx-whoami-index
+        configMap:
+          name: nginx-whoami-index
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-whoami
+spec:
+  selector:
+    app: nginx-whoami
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80

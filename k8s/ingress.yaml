@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nginx
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  rules:
+    - http:
+        paths:
+          - pathType: Prefix
+            backend:
+              service:
+                name: nginx-whoami
+                port:
+                  number: 80
+            path: /whoami
+          - pathType: Prefix
+            backend:
+              service:
+                name: nginx-main
+                port:
+                  number: 80
+            path: /
